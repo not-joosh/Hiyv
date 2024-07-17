@@ -3,4 +3,6 @@
     <string name="login_title">HIYV</string>
     <string name="login_subtitle">Tap In!</string>
     <string name="email">Email</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

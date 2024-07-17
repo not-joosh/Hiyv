@@ -142,4 +142,7 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+    <color name="CustomAuthColor">#49688D</color>
+    <color name="CustomAuthColor2">#ea2d40</color>
+
 </resources>
