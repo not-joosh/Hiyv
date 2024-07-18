@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830744789139",
+    "project_id": "hiyv-52d52",
+    "storage_bucket": "hiyv-52d52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830744789139:android:80af675084a8a59009cd66",
+        "android_client_info": {
+          "package_name": "com.example.hiyv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALGZg727IGuMybHI3ewbQlad7JPP5URpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

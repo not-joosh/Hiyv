@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -13,7 +14,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,7 +40,11 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-auth")
     implementation("com.github.bumptech.glide:glide:4.15.0")
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore.ktx)
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
