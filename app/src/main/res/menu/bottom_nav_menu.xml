@@ -3,16 +3,20 @@
     <item
         android:id="@+id/navigation_mail"
         android:icon="@drawable/mail_icon"
+        android:visible="true"
         android:title="Mail" />
     <item
         android:id="@+id/navigation_tasks"
+        android:visible="true"
         android:icon="@drawable/task_icon"
         android:title="Tasks" />
     <item
+        android:visible="true"
         android:id="@+id/navigation_members"
         android:icon="@drawable/members_icon"
         android:title="Members" />
     <item
+        android:visible="true"
         android:id="@+id/navigation_logout"
         android:icon="@drawable/logout_icon"
         android:title="Sign Out" />

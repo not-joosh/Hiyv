@@ -49,6 +49,42 @@ class MainActivity : AppCompatActivity() {
         // Load the image using Glide
         Glide.with(this).load(R.drawable.backdrop_authentication).into(binding.gifContainer)
 
+        // Checking if Login Button is clicked
+        // Set up the login button click listener
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmailInput.text.toString().trim()
+            val password = binding.etPasswordInput.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter your email and password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Authenticate user with email and password
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        val user = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        val exception = task.exception
+                        val errorMessage = when (exception) {
+                            is FirebaseAuthInvalidCredentialsException -> "Invalid email or password."
+                            else -> "Authentication failed: ${exception?.message}"
+                        }
+                        Toast.makeText(baseContext, errorMessage, Toast.LENGTH_SHORT).show()
+                        updateUI(null)
+                    }
+                }
+        }
+
         // Set up the ClickableSpan for "Click Here!"
         val clickHereText = binding.clickHere
         val spannableString = SpannableString(clickHereText.text)
