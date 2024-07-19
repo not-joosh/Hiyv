@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_mail"
+        android:icon="@drawable/mail_icon"
+        android:title="Mail"
+        />
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/task_icon"
+        android:title="Tasks" />
+    <item
+        android:id="@+id/navigation_logout"
+        android:icon="@drawable/logout_icon"
+        android:title="Sign Out" />
+</menu>

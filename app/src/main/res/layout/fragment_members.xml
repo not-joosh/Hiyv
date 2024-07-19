@@ -22,6 +22,7 @@
     <!-- Member List Container -->
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
@@ -67,5 +68,17 @@
         android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="NotSibling" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMemberList"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gif_container"
+        app:layout_constraintEnd_toEndOf="@+id/gif_container"
+        app:layout_constraintStart_toStartOf="@+id/gif_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
