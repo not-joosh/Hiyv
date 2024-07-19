@@ -1,6 +1,7 @@
 package com.example.hiyv
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,38 +65,62 @@ class MailFragment : Fragment() {
 
                 if (documentSnapshot != null && documentSnapshot.exists()) {
                     val invites = documentSnapshot.get("invites") as? List<String> ?: emptyList()
-                    arrayOfInvites.clear()
+                    val newInvites = mutableListOf<Invite>()
 
                     invites.forEach { inviteId ->
                         db.collection("users").document(inviteId).get()
                             .addOnSuccessListener { inviteDoc ->
                                 val name = inviteDoc.getString("Name") ?: ""
-                                val invite = Invite(inviteId, name)
-                                arrayOfInvites.add(invite)
-                                inviteListAdapter.notifyDataSetChanged()
+                                newInvites.add(Invite(inviteId, name))
+
+                                // Refresh adapter data once all invites are loaded
+                                if (newInvites.size == invites.size) {
+                                    arrayOfInvites.clear()
+                                    arrayOfInvites.addAll(newInvites)
+                                    inviteListAdapter.notifyDataSetChanged()
+                                    Log.d("MailFragment", "Invites updated: $arrayOfInvites")
+                                }
                             }
                     }
                 }
             }
     }
 
+
+
     private fun acceptInvite(userId: String) {
         val currentUserId = Firebase.auth.currentUser?.uid ?: return
         val db = Firebase.firestore
 
-        db.collection("users").document(currentUserId)
-            .update("family", FieldValue.arrayUnion(userId), "invites", FieldValue.arrayRemove(userId))
-            .addOnSuccessListener {
-                val invite = arrayOfInvites.find { it.userId == userId }
-                arrayOfInvites.remove(invite)
-                inviteListAdapter.notifyDataSetChanged()
+        // Update the current user's `myJoinedFamilies` array and remove the invite
+        val currentUserUpdate = db.collection("users").document(currentUserId)
+            .update(
+                "myJoinedFamilies", FieldValue.arrayUnion(userId),
+                "invites", FieldValue.arrayRemove(userId)
+            )
 
-                Toast.makeText(context, "Successfully joined Family!", Toast.LENGTH_SHORT).show()
+        // Update the invited user's `family` array with the current user's ID
+        val invitedUserUpdate = db.collection("users").document(userId)
+            .update("family", FieldValue.arrayUnion(currentUserId))
+
+        // Handle both updates
+        currentUserUpdate
+            .addOnSuccessListener {
+                invitedUserUpdate
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Successfully joined the family!", Toast.LENGTH_SHORT).show()
+                        loadInvites() // Trigger a refresh of the invites list
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "Failed to update invited user's family: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(context, "Failed to accept invite: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
+
 
     private fun declineInvite(userId: String) {
         val currentUserId = Firebase.auth.currentUser?.uid ?: return

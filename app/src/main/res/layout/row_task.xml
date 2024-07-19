@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/member_row_backdrop"
+    android:padding="12dp">
+
+
+
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Day Of Week"
+        android:textSize="12sp"
+        android:textColor="#FF555555"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvDateStr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textSize="9sp"
+        android:text="Month DD, YYYY"
+        android:textColor="#FFAAAAAA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tvDate"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/tvLabel0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Assigned Task"
+        android:textColor="#FFAAAAAA"
+        android:textSize="8sp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/tvDate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvTaskName"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textSize="12sp"
+        android:text="Task Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tvLabel0"
+        app:layout_constraintTop_toBottomOf="@id/tvLabel0"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Completed by"
+        android:textColor="#FFAAAAAA"
+        android:textSize="8sp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/tvLabel0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/tvCompletedBy"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_regular"
+        android:textSize="12sp"
+        android:text="Person"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tvLabel1"
+        app:layout_constraintTop_toBottomOf="@id/tvLabel1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Completed by"
+        android:textColor="#FFAAAAAA"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/removeTaskBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <ImageButton
+        android:id="@+id/removeTaskBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/delete_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:buttonTintMode="multiply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvLabel2"
+        app:layout_constraintStart_toStartOf="@+id/tvLabel2"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabel2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

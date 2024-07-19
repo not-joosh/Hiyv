@@ -1,6 +1,5 @@
 package com.example.hiyv
 
-import ScheduledTask
 import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString

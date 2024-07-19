@@ -85,17 +85,32 @@ class MembersFragment : Fragment() {
         val currentUserId = Firebase.auth.currentUser?.uid ?: return
         val db = Firebase.firestore
 
-        db.collection("users").document(currentUserId)
+        // Remove the member from your `family` array
+        val currentUserUpdate = db.collection("users").document(currentUserId)
             .update("family", FieldValue.arrayRemove(memberId))
+
+        // Remove your ID from the removed member's `myJoinedFamilies` array
+        val memberUpdate = db.collection("users").document(memberId)
+            .update("myJoinedFamilies", FieldValue.arrayRemove(currentUserId))
+
+        // Handle both updates
+        currentUserUpdate
             .addOnSuccessListener {
-                arrayOfMembers.removeAll { it.id == memberId }
-                memberListAdapter.notifyDataSetChanged()
-                Toast.makeText(context, "Member removed successfully", Toast.LENGTH_SHORT).show()
+                memberUpdate
+                    .addOnSuccessListener {
+                        arrayOfMembers.removeAll { it.id == memberId }
+                        memberListAdapter.notifyDataSetChanged()
+                        Toast.makeText(context, "Member removed successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "Failed to update member's myJoinedFamilies: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(context, "Failed to remove member: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 
     private fun showInviteMemberDialog() {
         val dialogBinding = DialogInviteMemberBinding.inflate(LayoutInflater.from(context))

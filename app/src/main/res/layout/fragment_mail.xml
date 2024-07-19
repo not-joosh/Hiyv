@@ -12,15 +12,18 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="136dp"
         android:text="Invites"
-        android:textSize="20sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:id="@+id/rvInviteList"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -31,6 +34,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

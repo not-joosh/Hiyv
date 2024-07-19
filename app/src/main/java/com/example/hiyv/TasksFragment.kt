@@ -1,7 +1,5 @@
 package com.example.hiyv
 
-import ScheduledTask
-import Task
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.hiyv.databinding.FragmentTasksBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +21,43 @@ class TasksFragment : Fragment() {
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
     private var accountType: String? = null
+    private val arrayOfTasks = arrayOf(
+        Task("Wednesday", "July 4, 2024", "Freedom", "Liberty", true),
+        Task("Friday", "August 28, 2024", "Release the birds, all of the birds, the lot, the many", "Secretary Alban, Lord of the Feathered Order", false),
+        Task("got lazy", "a", "a", "a", true),
+        Task("got lazy", "b", "b", "b", false)
+    )
+    private val arrayOfScheduledTask = arrayOf(
+        ScheduledTask("MWF Classes",
+            isMonday = true,
+            isTuesday = false,
+            isWednesday = true,
+            isThursday = false,
+            isFriday = true,
+            isSaturday = false,
+            isSunday = false
+        ),
+        ScheduledTask("TTh Classes",
+            isMonday = false,
+            isTuesday = true,
+            isWednesday = false,
+            isThursday = true,
+            isFriday = false,
+            isSaturday = false,
+            isSunday = false
+        ),
+        ScheduledTask("Sleeping Days",
+            isMonday = true,
+            isTuesday = true,
+            isWednesday = true,
+            isThursday = true,
+            isFriday = true,
+            isSaturday = true,
+            isSunday = true
+        )
+    )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +79,36 @@ class TasksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val rvTaskList: RecyclerView = view.findViewById(R.id.task_list_recycler_view)
+        rvTaskList.layoutManager = LinearLayoutManager(requireContext())
+        val taskListAdapter = TasksListAdapter(arrayOfTasks, accountType!!)
+        rvTaskList.adapter = taskListAdapter
+
+        val rvScheduledTaskList: RecyclerView = view.findViewById(R.id.scheduled_tasks_recycler_view)
+        rvScheduledTaskList.layoutManager = LinearLayoutManager(requireContext())
+        val memberListAdapter = ScheduledTasksListAdapter(arrayOfScheduledTask)
+        rvScheduledTaskList.adapter = memberListAdapter
+
         binding.addTaskIcon.setOnClickListener {
             showCreateTaskDialog()
         }
 
         binding.addScheduledTaskIcon.setOnClickListener {
             showScheduleTaskDialog()
+        }
+
+        if(accountType == "Child") {
+            rvScheduledTaskList.visibility = View.GONE
+            binding.addScheduledTaskIcon.visibility = View.GONE
+            binding.tvScheduleTask.visibility = View.GONE
+            binding.tvCreateTask.visibility = View.GONE
+            binding.addTaskIcon.visibility = View.GONE
+        } else {
+            rvTaskList.visibility = View.VISIBLE
+            binding.addScheduledTaskIcon.visibility = View.VISIBLE
+            binding.tvScheduleTask.visibility = View.VISIBLE
+            binding.tvCreateTask.visibility = View.VISIBLE
+            binding.addTaskIcon.visibility = View.VISIBLE
         }
     }
 
