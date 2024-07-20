@@ -4,17 +4,18 @@ data class Task(
     val date: String = "",
     val dateStr: String = "",
     val taskName: String = "",
-    val completedBy: String = "",
-    val isCompleted: Boolean = false
+    var completedBy: String = "",
+    var isCompleted: Boolean = false
 )
 
 data class ScheduledTask(
-    val taskName: String = "",
-    val isMonday: Boolean = false,
-    val isTuesday: Boolean = false,
-    val isWednesday: Boolean = false,
-    val isThursday: Boolean = false,
-    val isFriday: Boolean = false,
-    val isSaturday: Boolean = false,
-    val isSunday: Boolean = false
+    val taskName: String,
+    val sunday: Boolean,
+    val monday: Boolean,
+    val tuesday: Boolean,
+    val wednesday: Boolean,
+    val thursday: Boolean,
+    val friday: Boolean,
+    val saturday: Boolean,
+    val lastCreated: Long? = null // Timestamp of the last creation
 )
